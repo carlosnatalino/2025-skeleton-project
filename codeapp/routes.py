@@ -15,7 +15,7 @@ from tabulate import tabulate
 from werkzeug.wrappers.response import Response as WerkzeugResponse
 
 # internal imports
-from codeapp.models import Show
+from codeapp.models import Any  # TODO: implement here
 from codeapp.utils import calculate_statistics, get_data_list, prepare_figure
 
 # define the response type
@@ -30,23 +30,16 @@ bp = Blueprint("bp", __name__, url_prefix="/")
 @bp.get("/")  # root route
 def home() -> Response:
     # gets dataset
-    dataset: list[Show] = get_data_list()
+    # TODO: implement here
 
     # get the statistics that is supposed to be shown
-    counter: dict[int, int] = calculate_statistics(dataset)
+    # TODO: implement here
 
     # convert the dictionary into a list of tuples
-    final_list = []
-    for key in sorted(counter.keys()):
-        final_list.append((key, counter[key]))
+    # TODO: implement here
 
     # generate the HTML table
-    html_table = tabulate(
-        final_list,
-        headers=["Year", "Count"],
-        tablefmt="html",
-        colalign=["left", "left"],
-    )
+    html_table = ""  # TODO: implement here
 
     # make nice formatting -- always use this line
     bootstrap_table = html_table.replace(
@@ -60,24 +53,13 @@ def home() -> Response:
 @bp.get("/data/")
 def data() -> Response:
     # gets dataset
-    dataset: list[Show] = get_data_list()
+    dataset: list[Any] = get_data_list()  # TODO: implement here
 
     # generate the table
     html_table = tabulate(
         dataset[0:100],
         headers=[
-            "ID",
-            "Type",
-            "Title",
-            "Director",
-            "Cast",
-            "Country",
-            "Date added",
-            "Release year",
-            "Duration",
-            "Listed in",
-            "Description",
-            "Rating",
+            # TODO: implement here
         ],
         tablefmt="html",
     )
@@ -88,38 +70,21 @@ def data() -> Response:
     )
 
     # render the page
-    return render_template("data.html", html=bootstrap_table)
+    return render_template("data.html", table=bootstrap_table)
 
 
 @bp.get("/image")
 def image() -> Response:
     # gets dataset
-    dataset: list[Show] = get_data_list()
+    dataset: list[Any] = get_data_list()  # TODO: implement here
 
     # get the statistics that is supposed to be shown
-    counter: dict[int, int] = calculate_statistics(dataset)
+    # TODO: implement here
 
     # creating the plot
 
     fig = Figure()
-    fig.gca().bar(
-        list(sorted(counter.keys())),
-        [counter[x] for x in sorted(counter.keys())],
-        color="gray",
-        # alpha=0.5,
-        zorder=2,
-    )
-    fig.gca().plot(
-        list(sorted(counter.keys())),
-        [counter[x] for x in sorted(counter.keys())],
-        marker="x",
-        color="#25a8a6",
-        zorder=1,
-    )
-    fig.gca().grid(ls=":", zorder=1)
-    fig.gca().set_xlabel("Release Year")
-    fig.gca().set_ylabel("Number of shows")
-    fig.tight_layout()
+    # TODO: implement here
 
     ################ START -  THIS PART MUST NOT BE CHANGED BY STUDENTS ################
     # create a string buffer to hold the final code for the plot
@@ -141,7 +106,7 @@ def about() -> Response:
 @bp.get("/json-dataset")  # root route
 def get_json_dataset() -> Response:
     # gets dataset
-    dataset: list[Show] = get_data_list()
+    dataset: list[Any] = get_data_list()  # TODO: implement here
 
     # render the page
     return jsonify(dataset)
@@ -150,10 +115,10 @@ def get_json_dataset() -> Response:
 @bp.get("/json-stats")  # root route
 def get_json_stats() -> Response:
     # gets dataset
-    dataset: list[Show] = get_data_list()
+    # TODO: implement here
 
     # get the statistics that is supposed to be shown
-    counter: dict[int, int] = calculate_statistics(dataset)
+    # TODO: implement here
 
     # render the page
-    return jsonify(counter)
+    return None  # jsonify(counter) # TODO: implement here

@@ -10,7 +10,7 @@ flake8 .
 $flake = $?
 
 # run pylint
-pylint ./codeapp
+pylint -s n ./codeapp
 $pyl = $?
 
 # run black

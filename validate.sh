@@ -8,7 +8,7 @@
 flake8 .
 flake=$?
 
-pylint ./codeapp
+pylint -s n ./codeapp
 pyl=$?
 
 black . --check

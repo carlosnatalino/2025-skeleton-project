@@ -28,7 +28,7 @@ def test_database_connection() -> None:
 
 def test_models() -> None:
     num_dataclasses = 0
-    num_fields = 8
+    num_fields = 7
     my_class: Optional[Any] = None  # type: ignore
     for _class in inspect.getmembers(models, inspect.isclass):
         if is_dataclass(_class[1]):
@@ -39,7 +39,7 @@ def test_models() -> None:
         + f"Expecting 1, got {num_dataclasses}."
     )
     if my_class is not None:
-        assert len(my_class.__dataclass_fields__) > num_fields, (
+        assert len(my_class.__dataclass_fields__) >= num_fields, (
             f"The number of fields should be at least {num_fields}. "
             + f"You have only {len(my_class.__dataclass_fields__)}."
         )

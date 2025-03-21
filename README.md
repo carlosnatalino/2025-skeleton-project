@@ -1,12 +1,10 @@
-# Example project for the final project of the EEN060/EEN065 courses
+# Skeleton project for the final project of the EEN060/EEN065 courses
 
 <h2 style="color: red;">
 Attention! You must not clone this repository. Instead, you must create a private one using this as a template.
 </h2>
 
-Example of the final project of EEN060/EEN065 courses.
-Note that this project is only for your reference.
-None of your modifications to this project will be valid for the final project.
+Skeleton/template for the final project of EEN060/EEN065 courses.
 
 ## Create a virtual environment
 
@@ -76,8 +74,9 @@ Here is the recommended sequence of steps that you need to follow to complete yo
 3. Populate the [utils.py](codeapp/utils.py) with the correct code to obtain and save the dataset.
   - To test if this step is correct, run `pytest -k data_list`.
   - To test if you are saving correctly to the database, run `pytest -k use_database`.
-4. Create the routes for the web services by implementing the functions `get_json_dataset` and `get_json_stats` in the [routes.py](codeapp/routes.py) file.
-5. Implement the route for the web page.
+4. Debug your implementation of the utils.py functions using the [debug_implementation.ipynb](debug_implementation.ipynb) file.
+5. Create the routes for the web services by implementing the functions `get_json_dataset` and `get_json_stats` in the [routes.py](codeapp/routes.py) file.
+6. Implement the route for the web page.
   - Start with the table by implementing the route `home` in the [routes.py](codeapp/routes.py) file.
   - Implement the visualization code for the table in the [home.html](codeapp/templates/home.html). To test this step, run `pytest -k html`.
   - Implement the `image` route in the [routes.py](codeapp/routes.py) file. To test this part, run `pytest -k image`.
@@ -106,8 +105,54 @@ or
 
 `sh validate.sh`
 
-### Running the tests
+### Validating your project manually
 
-To run the tests of your project, without running the entire validation suite, you can run in the terminal:
+You can validate your project manually by running the following commands:
 
-`pytest`
+1. Code quality validation step 1:
+
+```
+flake8 .
+```
+
+2. Code quality validation step 2:
+
+```
+pylint -s n codeapp
+```
+
+3. Code quality validation step 3:
+
+```
+black . --check
+```
+
+If `black` shows some issues, you can ask it to try to fix the issues with the command:
+
+```
+black .
+```
+
+4. Code quality step 4 (type hints):
+
+```
+mypy .
+```
+
+5. Code quality step 5 (imports):
+
+```
+isort . --check-only --diff
+```
+
+You can also ask `isort` to try to fix the issues using the command:
+
+```
+isort .
+```
+
+6. To run the tests of your project, without running the entire validation suite, you can run in the terminal:
+
+```
+pytest
+```

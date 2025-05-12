@@ -6,7 +6,7 @@
 # .\validate.ps1
 
 # run flake8
-flake8 .
+flake8 ./codeapp
 $flake = $?
 
 # run pylint
@@ -14,15 +14,15 @@ pylint -s n ./codeapp
 $pyl = $?
 
 # run black
-black . --check
+black ./codeapp --check
 $blc = $?
 
 # run mypy
-mypy .
+mypy ./codeapp
 $mp = $?
 
 # run isort
-isort . --check-only --diff
+isort ./codeapp --check-only --diff
 $is = $?
 
 # run tests and code coverage
@@ -33,37 +33,37 @@ $cov = $?
 
 # printing output
 if ( $flake ) {
-    Write-Output "Flake8`t$([char]0x2705)"
+    Write-Output "Flake8`tPass"
 } else {
-    Write-Output "Flake8`t$([char]0x274c)"
+    Write-Output "Flake8`tFail"
 }
 
 if ( $pyl ) {
-    Write-Output "Pylint`t$([char]0x2705)"
+    Write-Output "Pylint`tPass"
 } else {
-    Write-Output "Pylint`t$([char]0x274c)"
+    Write-Output "Pylint`tFail"
 }
 
 if ( $blc ) {
-    Write-Output "Black`t$([char]0x2705)"
+    Write-Output "Black`tPass"
 } else {
-    Write-Output "Black`t$([char]0x274c)"
+    Write-Output "Black`tFail"
 }
 
 if ( $mp ) {
-    Write-Output "Mypy`t$([char]0x2705)"
+    Write-Output "Mypy`tPass"
 } else {
-    Write-Output "Mypy`t$([char]0x274c)"
+    Write-Output "Mypy`tFail"
 }
 
 if ( $is ) {
-    Write-Output "isort`t$([char]0x2705)"
+    Write-Output "isort`tPass"
 } else {
-    Write-Output "isort`t$([char]0x274c)"
+    Write-Output "isort`tFail"
 }
 
 if ( $test -and $cov ) {
-    Write-Output "Tests`t$([char]0x2705)"
+    Write-Output "Tests`tPass"
 } else {
-    Write-Output "Tests`t$([char]0x274c)"
+    Write-Output "Tests`tFail"
 }

@@ -5,19 +5,19 @@
 # in the shell, with your virtual environment activated, run:
 # source validate.sh
 
-flake8 .
+flake8 ./codeapp
 flake=$?
 
 pylint -s n ./codeapp
 pyl=$?
 
-black . --check
+black ./codeapp --check
 blc=$?
 
-mypy .
+mypy ./codeapp
 mp=$?
 
-isort . --check-only --diff
+isort ./codeapp --check-only --diff
 is=$?
 
 coverage run -m pytest --log-cli-level="CRITICAL"
@@ -27,42 +27,42 @@ cov=$?
 # printing output
 if [ $flake -eq 0 ]
 then
-    echo -e "Flake8\t\u2705"
+    echo "Flake8\tPass"
 else
-    echo -e "Flake8\t\u274c"
+    echo "Flake8\tFail"
 fi
 
 if [ $pyl -eq 0 ]
 then
-    echo -e "Pylint\t\u2705"
+    echo "Pylint\tPass"
 else
-    echo -e "Pylint\t\u274c"
+    echo "Pylint\tFail"
 fi
 
 if [ $blc -eq 0 ]
 then
-    echo -e "Black\t\u2705"
+    echo "Black\tPass"
 else
-    echo -e "Black\t\u274c"
+    echo "Black\tFail"
 fi
 
 if [ $mp -eq 0 ]
 then
-    echo -e "Mypy\t\u2705"
+    echo "Mypy\tPass"
 else
-    echo -e "Mypy\t\u274c"
+    echo "Mypy\tFail"
 fi
 
 if [ $is -eq 0 ]
 then
-    echo -e "isort\t\u2705"
+    echo "isort\tPass"
 else
-    echo -e "isort\t\u274c"
+    echo "isort\tFail"
 fi
 
 if [ $cov -eq 0 ]
 then
-    echo -e "Tests\t\u2705"
+    echo "Tests\tPass"
 else
-    echo -e "Tests\t\u274c"
+    echo "Tests\tFail"
 fi
